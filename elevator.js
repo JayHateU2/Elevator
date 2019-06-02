@@ -1,15 +1,13 @@
 window.onload = function() {
-  //最高樓層
+  //ชั้นสูงสุด
   const maxF = 7;
-  //地下樓層
-  const maxB = 3;
-  //所有樓層
-  const allFloor = [...Array(maxB).keys()]
-    .reverse()
-    .map(x => "B" + (x + 1))
-    .concat([...Array(maxF).keys()].map(x => x + 1));
+  
+  //ชั้นทั้งหมด
+  const allFloor = [...Array(maxF).keys()]
+    .map(x => x + 1);
   console.log(allFloor);
-  //當前所在樓層
+
+  //ชั้นปัจจุบัน
   let nowF = Math.floor(Math.random() * allFloor.length);
   document.getElementById("nowFloor").textContent = allFloor[nowF];
   console.log("當前所在樓層: " + allFloor[nowF]);
@@ -34,30 +32,24 @@ window.onload = function() {
 
   let btnAct = true;
 
-  //人物
+  //ตัวละคร
   const people = {
-    "1樓的警衛": "...",
-    "6樓的老闆娘": ":)",
-    "6樓的正妹": "呵呵",
-    "7樓的同事": "早安阿",
-    動物園園長: "早!",
-    "10樓的宅宅": "安安",
-    巔峰戰士: "快快!10點0分30秒了",
-    小房間守備員: "來來來~ 坐坐坐",
-    資深假裝上班CTO: "你騎車嗎?穿這樣會冷嗎?住哪裡?騎過來多久?",
-    外送員: "便當來了",
-    "1樓的警衛": "早!!!(對後面的6樓正妹)",
-    大學長: "公司考量"
+    "รปภ ": "...",
+    "พนง": ":)",
+    "เลขา": "สวัสดี",
+    "ผู้อำนวยการ": "...",
+    ลูกค้า: "...",
+    ฝ่ายเทคนิค: "ขอเข้าไปหน่อยนะครับ",
   };
 
-  //電梯隨機樓層
+  //สุ่มชั้น
   eleFV = [...Object.keys(eleF)].map(
     x => (x = Math.floor(Math.random() * allFloor.length))
   );
   console.log(eleFV);
   eleFV.map((x, y) => (eleF[y].textContent = allFloor[x]));
 
-  //判斷呼叫電梯
+  //เรียก
   function eleClick(id) {
     document.getElementById(id).classList.add("on");
     if (btnAct) {
@@ -65,13 +57,12 @@ window.onload = function() {
       let floorDis2 = Math.abs(nowF - eleFV[1]);
       let floorDis3 = Math.abs(nowF - eleFV[2]);
       let floorDis4 = Math.abs(nowF - eleFV[3]);
-      if (true) {let actEle = floorDis1 > floorDis2 ? start(1) : start(0);} 
-
+      let actEle = start(Math.min(floorDis1,floorDis2,floorDis3,floorDis4)) ;
       btnAct = false;
     }
   }
 
-  //電梯移動
+  //Start
   function start(id) {
     Object.values(ele).map(x => x.classList.remove("act"));
     ele[id].classList.add("act");
@@ -90,10 +81,10 @@ window.onload = function() {
         ele[id].classList.remove("act");
         eleOpen(id);
       }
-    }, 1000);
+    }, 500);
   }
 
-  //電梯開門
+  //Open
   function eleOpen(id) {
     let who = Math.floor(Math.random() * Object.keys(people).length);
     let allP = [...Object.keys(people)];
@@ -114,7 +105,7 @@ window.onload = function() {
     document.getElementById("conDown").classList.remove("on");
   }
 
-  //重新開始
+  //Reset
   function restart() {
     document.getElementById("door1").classList.remove("act");
     document.getElementById("door2").classList.remove("act");
@@ -127,7 +118,7 @@ window.onload = function() {
 
     nowF = Math.floor(Math.random() * allFloor.length);
     document.getElementById("nowFloor").textContent = allFloor[nowF];
-    console.log("當前所在樓層: " + allFloor[nowF]);
+    console.log("CurrentF: " + allFloor[nowF]);
     eleFV = [...Object.keys(eleF)].map(
       x => (x = Math.floor(Math.random() * allFloor.length))
     );
@@ -138,7 +129,7 @@ window.onload = function() {
     document.getElementById("conDown").classList.remove("on");
   }
 
-  //電梯按鈕
+  //ปุ่มกด
   document.getElementById("conUp").addEventListener("click", function() {
     eleClick(this.id);
   });
