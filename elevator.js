@@ -10,7 +10,7 @@ window.onload = function() {
   //ชั้นปัจจุบัน
   let nowF = Math.floor(Math.random() * allFloor.length);
   document.getElementById("nowFloor").textContent = allFloor[nowF];
-  console.log("當前所在樓層: " + allFloor[nowF]);
+  console.log("CurrentF: " + allFloor[nowF]);
 
   const ele = {
     0: (ele1 = document.getElementById("ele1")),
