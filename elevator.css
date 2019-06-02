@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif, "微軟正黑體";
+  background-color: #fefdfc;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 40vh 1em 0 1em;
+  background-color: #aaa;
+  box-shadow: 0 0 1em #aaa;
+}
+.eleArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.eleF {
+  font-size: 1.2em;
+  width: 3em;
+  height: 1.4em;
+  line-height: 1.4em;
+  margin: 0.6em;
+  background-color: #333;
+  color: #dd8a00;
+  transition: 0.3s;
+}
+.act .eleF {
+  box-shadow: inset 0 0 0.5em #fc7;
+  color: #fc7;
+}
+.door {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 12em;
+  height: 14em;
+  background-color: #ccc;
+  border: 0.2em solid #919191;
+  border-bottom-width: 0;
+  pointer-events: none;
+  transition: 1s;
+}
+.door .person {
+  position: absolute;
+  height: 6em;
+  width: 3em;
+  bottom: 0;
+  opacity: 0;
+  transition: 1s;
+}
+.door .personSay {
+  position: absolute;
+  top: 1em;
+  padding: 4px;
+  background-color: white;
+  color: grey;
+  border: 2px solid grey;
+  border-radius: 10px;
+  opacity: 0;
+  transition: 1s;
+}
+.door.act {
+  pointer-events: auto;
+}
+.door.act .person {
+  opacity: 1;
+  padding-top: 0.2em;
+  background-color: #fde9a3;
+  border-radius: 1em 1em 0 0;
+  pointer-events: none;
+  transition: 1s;
+}
+.door.act .person::before {
+  content: "";
+  position: absolute;
+  width: 2.8em;
+  height: 2.8em;
+  top: -2.6em;
+  left: 0.1em;
+  background-color: #fde9a3;
+  border-radius: 100%;
+}
+.door.act .person.girl {
+  background-color: #fcc;
+}
+.door.act .person.girl::before {
+  background-color: #fcc;
+  border-radius: 100% 100% 0 0;
+}
+.door.act .personSay {
+  opacity: 1;
+  transition: 1s;
+}
+.door::before {
+  content: "";
+  position: relative;
+  width: 0;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 0 white;
+  transition: 1s;
+}
+.door.act::before {
+  width: 9em;
+  box-shadow: 0 0 1em white;
+  cursor: pointer;
+  transition: 1s;
+  animation: eleInside 1s alternate infinite;
+}
+@keyframes eleInside {
+  0% {
+    box-shadow: 0 0 1em white;
+  }
+  100% {
+    box-shadow: 0 0 2em 0.2em white;
+  }
+}
+.floorArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.nowFloor {
+  font-size: 4em;
+}
+.controller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 3em;
+  background-color: #eee;
+  border: 2px solid #d5d5d5;
+}
+.conBtn {
+  margin: 0.5em;
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  background-color: transparent;
+  border: 1em solid transparent;
+  cursor: pointer;
+}
+.conBtn.up {
+  border-bottom-color: #dd8a00;
+}
+.conBtn.up:hover {
+  border-bottom-color: #fc7;
+}
+.conBtn.up.on {
+  border-bottom-color: #fc7;
+  pointer-events: none;
+}
+.conBtn.down {
+  border-top-color: #dd8a00;
+}
+.conBtn.down:hover {
+  border-top-color: #fc7;
+}
+.conBtn.down.on {
+  border-top-color: #fc7;
+  pointer-events: none;
+}
